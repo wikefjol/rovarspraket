@@ -1,0 +1,11 @@
+{
+  "name": "@acme/api",
+  "version": "1.0.0",
+  "main": "src/server.js",
+  "type": "commonjs",
+  "scripts": { "start": "node src/server.js" },
+  "dependencies": {
+    "express": "^5.1.0",
+    "@acme/backend": "file:../backend"
+  }
+}
