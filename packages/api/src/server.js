@@ -1,16 +1,15 @@
 const express = require('express');
-const { add } = require('@acme/backend');
+const routes = require('./routes');
 
 const app = express();
 app.use(express.json());
+app.use(routes);
 
-app.post('/add', (req, res) => {
-  try {
-    const { a, b } = req.body;
-    res.json({ result: add(a, b) });
-  } catch (e) {
-    res.status(400).json({ error: e.message });
-  }
+// 404 + error handler
+app.use((req,res)=>res.status(404).json({error:'Not Found'}));
+app.use((err,req,res,_)=>{
+  console.error(err);
+  res.status(err.status||500).json({error: err.message || 'Server error'});
 });
 
 const PORT = process.env.PORT || 8081;
